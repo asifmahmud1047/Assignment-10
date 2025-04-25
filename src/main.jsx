@@ -4,10 +4,34 @@ import "./index.css";
 import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import Home from "./Components/Home/Home.jsx";
+import Allvisa from "./Page/Allvisas/Allvisa.jsx";
+import Addvisa from "./Page/Addvisa/Addvisa.jsx";
+import Addedvisa from "./Page/Addedvisa/Addedvisa.jsx";
+import Application from "./Page/Application/Application.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <div>Hello world!</div>,
+    element: <Home></Home>,
+    children: [
+      {
+        path: "/allvisa",
+        element: <Allvisa></Allvisa>,
+      },
+      {
+        path: "/addvisa",
+        element: <Addvisa></Addvisa>,
+      },
+      {
+        path: "/addedvisa",
+        element: <Addedvisa></Addedvisa>,
+      },
+      {
+        path: "/application",
+        element: <Application></Application>,
+      },
+    ],
   },
 ]);
 createRoot(document.getElementById("root")).render(
