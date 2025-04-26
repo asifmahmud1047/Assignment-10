@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import {Link, NavLink } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -107,8 +107,11 @@ const Header = () => {
       </div>
 
       {/* Right Side: Login Button */}
-      <div className="navbar-end">
-        <button className="btn btn-primary">Login</button>
+      <div className="navbar-end flex  items-center gap-2">
+        <Link to={"/login"} className="btn btn-primary">
+          Login
+        </Link>
+        <button className="btn btn-primary">Register</button>
       </div>
     </div>
   );
