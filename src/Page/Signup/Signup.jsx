@@ -1,0 +1,163 @@
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import Header from "../../Components/Header/Header";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Authcontext } from "../../Authprovider/Authprovider";
+
+const Signup = () => {
+  const { signup, setUser } = useContext(Authcontext);
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handlesignup = (event) => {
+    event.preventDefault();
+    const name = event.target.name.value;
+    const photo = event.target.photo.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+    const tram = event.target.tram.checked;
+
+    if (password.length < 6) {
+      return toast.error("Password must be at least 6 characters long");
+    }
+
+    const passwordPattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!passwordPattern.test(password)) {
+      return toast.warn("Password is not strong enough.");
+    }
+    if (!tram) {
+      return toast.error("plase accept our condition");
+    }
+
+    signup(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        setUser(user);
+        toast.success("Registration successful!");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        toast.error(errorMessage);
+      });
+  };
+  return (
+    <div>
+      <Header></Header>
+      <div className="min-h-screen flex justify-center items-center my-14">
+        <div className="card bg-base-100 w-full max-w-xl shrink-0 shadow-2xl">
+          <h1 className="font-semibold text-2xl text-center">
+            Register your account
+          </h1>
+          <form onSubmit={handlesignup} className="card-body">
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Your Name</span>
+              </label>
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter Your Name"
+                className="input input-bordered"
+                required
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                name="photo"
+                placeholder="Enter Your Photo URL"
+                className="input input-bordered"
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Email</span>
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Your Email"
+                className="input input-bordered"
+                required
+              />
+            </div>
+
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Enter Your Password"
+                  className="input input-bordered w-full"
+                  required
+                />
+                <span
+                  className="absolute right-3 top-3 text-gray-500 cursor-pointer"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <AiOutlineEyeInvisible className="w-6 h-6" />
+                  ) : (
+                    <AiOutlineEye className="w-6 h-6" />
+                  )}
+                </span>
+              </div>
+            </div>
+
+            <div className="form-control">
+              <label className="cursor-pointer label justify-start gap-3">
+                <input
+                  type="checkbox"
+                  name="tram"
+                  className="checkbox checkbox-accent"
+                />
+                <span className="label-text">Remember me</span>
+              </label>
+            </div>
+
+            <div className="form-control mt-6">
+              <button className="btn btn-warning">Sign up</button>
+            </div>
+            <div className="divider">OR</div>
+            <div className="form-control mt-6 mb-4">
+              <button className="btn btn-neutral">
+                {" "}
+                <img
+                  className="h-8"
+                  src="https://img.icons8.com/?size=48&id=V5cGWnc9R4xj&format=png"
+                  alt=""
+                />
+                Sign up With Google
+              </button>
+            </div>
+            <div>
+              <h1 className="font-semibold">
+                Already Have An Account?{" "}
+                <Link to={"/login"} className="text-red-500">
+                  Login
+                </Link>
+              </h1>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Signup;
