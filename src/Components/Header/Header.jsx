@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import {Link, NavLink } from "react-router-dom";
+import { Authcontext } from "../../Authprovider/Authprovider";
 
 const Header = () => {
+    const { user, signout } = useContext(Authcontext);
+
   return (
     <div className="navbar bg-[#00255c] shadow-md justify-between px-4">
       {/* Left Side: Logo */}
@@ -108,12 +112,33 @@ const Header = () => {
 
       {/* Right Side: Login Button */}
       <div className="navbar-end flex  items-center gap-2">
-        <Link to={"/login"} className="btn btn-primary">
-          Login
-        </Link>
-        <Link to={"/signup"} className="btn btn-primary">
-          Register
-        </Link>
+        {user && user.email ? (
+          <div className="flex items-center gap-2">
+            {/* <h1 className="text-white font-bold">{user.email}</h1> */}
+            <div className="relative group">
+              <img
+                className="w-10 h-10 rounded-full"
+                src={user.photoURL}
+                alt="User Avatar"
+              />
+              <div className="absolute left-1/2 transform -translate-x-1/2 bottom-12 hidden group-hover:flex bg-gray-800 text-white text-xs rounded px-2 py-1 shadow-lg">
+                {user.displayName || "User Name Not Found"}
+              </div>
+            </div>
+            <Link onClick={signout} className="btn btn-primary">
+              Logout
+            </Link>
+          </div>
+        ) : (
+          <div className="flex  items-center gap-2">
+            <Link to={"/login"} className="btn btn-primary">
+              Login
+            </Link>
+            <Link to={"/signup"} className="btn btn-primary">
+              Register
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

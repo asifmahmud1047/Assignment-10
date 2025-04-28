@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Header from "../../Components/Header/Header";
 import { toast } from "react-toastify";
@@ -7,8 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { Authcontext } from "../../Authprovider/Authprovider";
 
 const Signup = () => {
-  const { signup, setUser } = useContext(Authcontext);
+  const { signup, setUser, userInfo } = useContext(Authcontext);
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -37,7 +38,11 @@ const Signup = () => {
     signup(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        userInfo({ displayName: name, photoURL: photo });
         setUser(user);
+        navigate("/");
+        console.log(user);
+        event.target.reset();
         toast.success("Registration successful!");
       })
       .catch((error) => {

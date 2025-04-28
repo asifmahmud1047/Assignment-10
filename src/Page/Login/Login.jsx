@@ -1,13 +1,41 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../Components/Header/Header";
+import { AuthContext } from "../../Authprovider/Authprovider";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const { login, setUser } = useContext(AuthContext);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+   const handleLogin = (event) => {
+     event.preventDefault();
+
+     const email = event.target.email.value;
+     const password = event.target.password.value;
+
+     login(email, password)
+       .then((userCredential) => {
+         const user = userCredential.user;
+         setUser(user);
+         event.target.reset();
+         navigate("/");
+         return toast.success("Login Successfull");
+       })
+       .catch((error) => {
+         const errorCode = error.code;
+         const errorMessage =
+           error.message || "Something went wrong. Please try again.";
+         return toast.error(errorMessage);
+       });
+   };
+
   return (
     <div>
       <Header></Header>
@@ -16,7 +44,7 @@ const Login = () => {
           <h1 className="font-semibold text-2xl text-center">
             Login Your Account
           </h1>
-          <form className="card-body">
+          <form onSubmit={handleLogin} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>

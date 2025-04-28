@@ -1,8 +1,10 @@
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile,
 } from "firebase/auth";
-import { subscribe } from "firebase/data-connect";
 import React, { createContext, useEffect, useState } from "react";
 import { auth } from "../Firebaseinte/Firebaseinte.js";
 export const Authcontext = createContext();
@@ -15,14 +17,29 @@ const Authprovider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+   const login = (email, password) => {
+     setLoading(false);
+
+     return signInWithEmailAndPassword(auth, email, password);
+   };
+
+   const signout = () => {
+     setLoading(true);
+     return signOut(auth);
+   };
+   const userINfo = (userData) => {
+     return updateProfile(auth.currentUser, userData);
+   };
+ 
+
   useEffect(() => {
-    const subscribe = onAuthStateChanged(auth, (currentUser) => {
+    const subscriber = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser || null);
       setLoading(false);
     });
 
     return () => {
-      subscribe();
+      subscriber();
     };
   }, []);
 
@@ -30,6 +47,9 @@ const Authprovider = ({ children }) => {
     signup,
     setUser,
     user,
+    login,
+    signout,
+    userINfo,
   };
   return <Authcontext.Provider value={onOuth}>{children}</Authcontext.Provider>;
 };
