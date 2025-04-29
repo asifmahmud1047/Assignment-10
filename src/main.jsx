@@ -12,11 +12,13 @@ import Login from "./Page/Login/Login.jsx";
 import Signup from "./Page/Signup/Signup.jsx";
 import Authprovider from "./Authprovider/Authprovider.jsx";
 import { ToastContainer } from "react-toastify";
+import Errorpage from "./Page/Errorpage/Errorpage.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home></Home>,
+    errorElement: <Errorpage></Errorpage>,
     children: [
       {
         path: "/allvisa",
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
         element: <Addedvisa></Addedvisa>,
       },
       {
-        path: "/application",
+        path: "/addedvisa",
         element: <Application></Application>,
       },
     ],
