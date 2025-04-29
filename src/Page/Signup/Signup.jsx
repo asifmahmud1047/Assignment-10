@@ -4,10 +4,10 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Header from "../../Components/Header/Header";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Authcontext } from "../../Authprovider/Authprovider";
+import { AuthContext } from "../../Authprovider/Authprovider";
 
 const Signup = () => {
-  const { signup, setUser, userInfo } = useContext(Authcontext);
+  const { signup, setUser, userInfo, googleLogin } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const togglePasswordVisibility = () => {
@@ -52,6 +52,28 @@ const Signup = () => {
         toast.error(errorMessage);
       });
   };
+
+   const googlelogin = () => {
+     googleLogin()
+       .then((result) => {
+         const credential = GoogleAuthProvider.credentialFromResult(result);
+         const token = credential.accessToken;
+         const user = result.user;
+         setUser(user);
+         navigate("/");
+         return toast.success("Login with Google Successfull");
+       })
+       .catch((error) => {
+         const errorCode = error.code;
+         const errorMessage = error.message;
+
+         const email = error.customData.email;
+
+         const credential = GoogleAuthProvider.credentialFromError(error);
+         return toast.error(errorMessage);
+       });
+   };
+
   return (
     <div>
       <Header></Header>
@@ -140,7 +162,7 @@ const Signup = () => {
             </div>
             <div className="divider">OR</div>
             <div className="form-control mt-6 mb-4">
-              <button className="btn btn-neutral">
+              <button onClick={googlelogin} className="btn btn-neutral">
                 {" "}
                 <img
                   className="h-8"

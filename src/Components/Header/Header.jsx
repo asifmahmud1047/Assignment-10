@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import {Link, NavLink } from "react-router-dom";
-import { Authcontext } from "../../Authprovider/Authprovider";
+import { AuthContext } from "../../Authprovider/Authprovider";
 
 const Header = () => {
-    const { user, signout } = useContext(Authcontext);
+    const { user, signout } = useContext(AuthContext);
 
   return (
-    <div className="navbar bg-[#00255c] shadow-md justify-between px-4">
+    <div className="navbar bg-[#00255c] shadow-md justify-between md:px-4">
       {/* Left Side: Logo */}
       <div className="navbar-start">
         {/* Dropdown for Mobile */}

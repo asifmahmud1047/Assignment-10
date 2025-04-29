@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const { login, setUser } = useContext(AuthContext);
+  const { login, setUser, googleLogin } = useContext(AuthContext);
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -35,6 +35,27 @@ const Login = () => {
          return toast.error(errorMessage);
        });
    };
+
+    const handlesignin = () => {
+      googleLogin()
+        .then((result) => {
+          const credential = GoogleAuthProvider.credentialFromResult(result);
+          const token = credential.accessToken;
+          const user = result.user;
+          setUser(user);
+          navigate("/");
+          return toast.success("Login with Google Successfull");
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+
+          const email = error.customData.email;
+
+          const credential = GoogleAuthProvider.credentialFromError(error);
+          return toast.error(errorMessage);
+        });
+    };
 
   return (
     <div>
@@ -96,7 +117,7 @@ const Login = () => {
             </div>
             <div className="divider">OR</div>
             <div className="form-control mt-6 mb-4">
-              <button className="btn btn-neutral">
+              <button onClick={handlesignin} className="btn btn-neutral">
                 {" "}
                 <img
                   className="h-8"
