@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Header from "../../Components/Header/Header";
 import { AuthContext } from "../../Authprovider/Authprovider";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
   const { login, setUser, googleLogin } = useContext(AuthContext);
   const togglePasswordVisibility = () => {
@@ -25,7 +26,7 @@ const Login = () => {
          const user = userCredential.user;
          setUser(user);
          event.target.reset();
-         navigate("/");
+         navigate(location.state || "/");
          return toast.success("Login Successfull");
        })
        .catch((error) => {

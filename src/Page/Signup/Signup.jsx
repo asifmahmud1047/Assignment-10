@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import Header from "../../Components/Header/Header";
 import { toast } from "react-toastify";
@@ -10,6 +10,7 @@ const Signup = () => {
   const { signup, setUser, userInfo, googleLogin } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -40,9 +41,9 @@ const Signup = () => {
         const user = userCredential.user;
         userInfo({ displayName: name, photoURL: photo });
         setUser(user);
-        navigate("/");
-        console.log(user);
+        
         event.target.reset();
+        navigate(location.state || "/");
         toast.success("Registration successful!");
       })
       .catch((error) => {

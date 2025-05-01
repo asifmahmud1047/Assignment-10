@@ -14,6 +14,7 @@ import Authprovider from "./Authprovider/Authprovider.jsx";
 import { ToastContainer } from "react-toastify";
 import Errorpage from "./Page/Errorpage/Errorpage.jsx";
 import Homelayout from "./Components/Homelayout/Homelayout.jsx";
+import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/addvisa",
-        element: <Addvisa></Addvisa>,
+        element: <PrivateRoute><Addvisa></Addvisa></PrivateRoute>
       },
       {
         path: "/addedvisa",
