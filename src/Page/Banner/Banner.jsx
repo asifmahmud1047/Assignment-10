@@ -13,7 +13,7 @@ const Banner = () => {
         <h1 className="font-bold text-2xl md:text-4xl mb-3">
           Explore Our Services
         </h1>
-        <p className="text-xl font-semibold">
+        <p className="md:text-xl font-semibold">
           Find the best visa options around the world.
         </p>
       </div>
