@@ -28,6 +28,8 @@ const router = createBrowserRouter([
       {
         path: "/allvisa",
         element: <Allvisa></Allvisa>,
+        loader: () =>
+          fetch("https://assignment-10-server-two-sand.vercel.app/visa"),
       },
       {
         path: "/addvisa",

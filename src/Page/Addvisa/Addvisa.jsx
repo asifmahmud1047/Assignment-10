@@ -1,4 +1,6 @@
 import React from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Addvisa = () => {
   const handleSubmit = (event) => {
@@ -37,9 +39,24 @@ const Addvisa = () => {
 
     console.log(data);
 
-    // Success message or API call here
-    alert("Visa added successfully!");
-    // Example: axios.post('/api/visas', data).then(response => ...)
+    fetch("https://assignment-10-server-two-sand.vercel.app/visa", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Success:", result);
+        event.target.reset();
+        if (result.insertedId) {
+          return toast.success("Visa Added Succussfull");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 
   return (
@@ -77,7 +94,6 @@ const Addvisa = () => {
               <option value="">Select Visa Type</option>
               <option value="TouristVisa">Tourist Visa</option>
               <option value="StudentVisa">Student Visa</option>
-              <option value="OfficialVisa">Official Visa</option>
             </select>
           </div>
           <div className="mb-4">
