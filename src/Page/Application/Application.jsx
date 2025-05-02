@@ -1,8 +1,30 @@
-import React from "react";
+import React, {useState} from "react";
 import { useLoaderData } from "react-router-dom";
+ import { toast } from "react-toastify";
+ import "react-toastify/dist/ReactToastify.css";
 
 const Application = () => {
   const applications = useLoaderData();
+
+   const [card, setCard] = useState(applications);
+
+   const handleCancel = (id) => {
+     fetch(`https://assignment-10-server-two-sand.vercel.app/apply/${id}`, {
+       method: "DELETE",
+     })
+       .then((res) => res.json())
+       .then((data) => {
+         if (data.deletedCount > 0) {
+           const remainingCard = card.filter((card) => card._id !== id);
+           setCard(remainingCard);
+           return toast.success("Deleted Successfull");
+         }
+       })
+       .catch((error) => {
+         console.error("Error deleting application:", error);
+         toast.error("Failed to delete the application.");
+       });
+   };
 
   return (
     <div className="my-20 w-10/12 mx-auto">
