@@ -49,7 +49,7 @@ const Header = () => {
               <NavLink to="/addedvisa">My Added Visas</NavLink>
             </li>
             <li>
-              <NavLink to="/application">My Visa Applications</NavLink>
+              <NavLink to="/visaapplication">My Visa Applications</NavLink>
             </li>
           </ul>
         </div>
@@ -100,7 +100,7 @@ const Header = () => {
             My Added Visas
           </NavLink>
           <NavLink
-            to="/application"
+            to="/visaapplication"
             className={({ isActive }) =>
               isActive ? "text-blue-700 font-bold" : "text-white font-bold"
             }

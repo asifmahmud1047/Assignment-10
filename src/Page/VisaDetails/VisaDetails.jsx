@@ -36,6 +36,12 @@ const Details = () => {
       lastName,
       appliedDate,
       free,
+      photo,
+      name,
+      visaType,
+      validity,
+      time,
+      applicationMethod,
     };
 
     console.log(Information);
@@ -190,7 +196,7 @@ const Details = () => {
                   days
                 </li>
                 <li>
-                  <span className="font-semibold">Application Fee:</span> ${fee}
+                  <span className="font-semibold">Application Fee:</span> {fee} K
                 </li>
                 <li>
                   <span className="font-semibold">Application Method:</span>{" "}

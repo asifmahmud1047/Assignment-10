@@ -46,8 +46,14 @@ const router = createBrowserRouter([
         element: <Addedvisa></Addedvisa>,
       },
       {
-        path: "/addedvisa",
-        element: <Application></Application>,
+        path: "/visaapplication",
+        element: (
+          <PrivateRoute>
+            <Application></Application>
+          </PrivateRoute>
+        ),
+        loader: () =>
+          fetch("https://assignment-10-server-two-sand.vercel.app/apply"),
       },
     ],
   },
