@@ -15,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import Errorpage from "./Page/Errorpage/Errorpage.jsx";
 import Homelayout from "./Components/Homelayout/Homelayout.jsx";
 import PrivateRoute from "./PrivateRoute/PrivateRoute.jsx";
+import VisaDetails from "./Page/VisaDetails/VisaDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addvisa",
-        element: <PrivateRoute><Addvisa></Addvisa></PrivateRoute>
+        element: (
+          <PrivateRoute>
+            <Addvisa></Addvisa>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/addedvisa",
@@ -53,6 +58,18 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup></Signup>,
+  },
+  {
+    path: "/details/:id",
+    element: (
+      <PrivateRoute>
+        <VisaDetails></VisaDetails>
+      </PrivateRoute>
+    ),
+    loader: ({ params }) =>
+      fetch(
+        `https://assignment-10-server-two-sand.vercel.app/visa/${params.id}`
+      ),
   },
 ]);
 createRoot(document.getElementById("root")).render(
