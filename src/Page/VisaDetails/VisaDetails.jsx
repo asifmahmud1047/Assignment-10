@@ -2,6 +2,8 @@ import React, { useContext } from "react";
 import Header from "../../Components/Header/Header";
 import { useLoaderData } from "react-router-dom";
 import { AuthContext } from "../../Authprovider/Authprovider";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Details = () => {
   const { user } = useContext(AuthContext);
@@ -19,7 +21,47 @@ const Details = () => {
     requiredDocuments,
   } = data;
 
-  const handleApplyVisa = () => {};
+  // apply from function
+  const handleApplyVisa = (event) => {
+    event.preventDefault();
+    const email = event.target.email.value;
+    const firstName = event.target.firstName.value;
+    const lastName = event.target.lastName.value;
+    const appliedDate = event.target.appliedDate.value;
+    const free = event.target.fee.value;
+
+    const Information = {
+      email,
+      firstName,
+      lastName,
+      appliedDate,
+      free,
+    };
+
+    console.log(Information);
+
+    fetch("https://assignment-10-server-two-sand.vercel.app/apply", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(Information),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log("Success:", result);
+        event.target.reset();
+        if (result.insertedId) {
+          return toast.success("Visa Added Succussfull");
+        }
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        const message = error.message;
+        return toast.error(message);
+      });
+  };
+
   return (
     <div>
       <Header></Header>
@@ -39,9 +81,7 @@ const Details = () => {
               />
             </div>
 
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
-            {/* <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>open modal</button> */}
-
+            {/* modal section start */}
             <dialog id="my_modal_1" className="modal">
               <div className="modal-box">
                 <h3 className="font-bold text-lg">Apply for Visa</h3>
@@ -128,6 +168,8 @@ const Details = () => {
                 </form>
               </div>
             </dialog>
+
+            {/* modal section end */}
 
             <div className="w-full md:w-2/3">
               <h2 className="text-2xl font-bold mb-2 text-gray-800">{name}</h2>
