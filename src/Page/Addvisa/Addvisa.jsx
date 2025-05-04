@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Authcontext } from "../../Authprovider/Authprovider";
 
 const Addvisa = () => {
+  const { user } = useContext(Authcontext);
+  const email = user.email;
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -35,9 +39,9 @@ const Addvisa = () => {
       fee,
       validity,
       applicationMethod,
+      email,
     };
 
-    console.log(data);
 
     fetch("https://assignment-10-server-two-sand.vercel.app/visa", {
       method: "POST",
@@ -48,7 +52,6 @@ const Addvisa = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("Success:", result);
         event.target.reset();
         if (result.insertedId) {
           return toast.success("Visa Added Succussfull");

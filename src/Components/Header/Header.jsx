@@ -110,18 +110,16 @@ const Header = () => {
         </ul>
       </div>
 
-      {/* Right Side: Login Button */}
       <div className="navbar-end flex  items-center gap-2">
         {user && user.email ? (
           <div className="flex items-center gap-2">
-            {/* <h1 className="text-white font-bold">{user.email}</h1> */}
             <div className="relative group">
               <img
                 className="w-10 h-10 rounded-full"
                 src={user.photoURL}
                 alt="User Avatar"
               />
-              <div className="absolute left-1/2 transform -translate-x-1/2 bottom-12 hidden group-hover:flex bg-gray-800 text-white text-xs rounded px-2 py-1 shadow-lg">
+              <div className="absolute left-1/2 transform -translate-x-1/2 bottom-12 hidden group-hover:flex bg-gray-800 text-white text-xs rounded px-2 py-1 shadow-lg z-50">
                 {user.displayName || "User Name Not Found"}
               </div>
             </div>
@@ -130,8 +128,8 @@ const Header = () => {
             </Link>
           </div>
         ) : (
-          <div className="flex  items-center gap-2">
-            <Link to={"/login"} className="btn btn-primary">
+          <div className="flex items-center gap-2">
+            <Link to="/login" className="btn btn-primary">
               Login
             </Link>
             <Link to={"/signup"} className="btn btn-primary">

@@ -1,8 +1,35 @@
+import React from "react";
+import { Typewriter } from "react-simple-typewriter";
 const VisaBenefits = () => {
   return (
     <div className="visa-benefits py-16 px-5 bg-gray-100">
       <div className="container mx-auto text-center">
-        <h2 className="text-3xl font-bold text-blue-700 mb-6">Visa Benefits</h2>
+        <h2 className="text-3xl font-bold text-blue-700 mb-6">
+          <Typewriter
+            words={["Visa Benefits", "Fast Processing", "Affordable Services"]}
+            loop={0} // Infinite loop; use a number for limited loops
+            cursor
+            cursorStyle="|"
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+          />
+        </h2>
+        <p className="text-lg mb-12">
+          Explore the key benefits of applying for your visa through us.
+        </p>
+
+        <h2 className="text-3xl font-bold text-blue-700 mb-6">
+          <Typewriter
+            words={["Visa Benefits", "Fast Processing", "Affordable Services"]}
+            loop={0} // Infinite loop; use a number for limited loops
+            cursor
+            cursorStyle="|"
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+          />
+        </h2>
         <p className="text-lg mb-12">
           Explore the key benefits of applying for your visa through us.
         </p>

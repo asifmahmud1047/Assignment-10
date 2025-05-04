@@ -5,13 +5,26 @@ import img2 from "../../../src/assets/img/5.jpg";
 import img3 from "../../../src/assets/img/TOURIST-scaled.jpg";
 import img4 from "../../../src/assets/img/662b7233670596731f8d433a.jpg";
 import img5 from "../../../src/assets/img/Visitor-visa.jpg";
+import { Typewriter } from "react-simple-typewriter";
 
 const Banner = () => {
   return (
     <div>
       <div className="flex items-center justify-center mb-7 flex-col">
         <h1 className="font-bold text-2xl md:text-4xl mb-3">
-          Explore Our Services
+          <Typewriter
+            words={[
+              "Explore Our Services",
+              "Fast Processing",
+              "Affordable Services",
+            ]}
+            loop={0}
+            cursor
+            cursorStyle="|"
+            typeSpeed={70}
+            deleteSpeed={50}
+            delaySpeed={1000}
+          />
         </h1>
         <p className="md:text-xl font-semibold">
           Find the best visa options around the world.

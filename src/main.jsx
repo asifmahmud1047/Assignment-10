@@ -43,7 +43,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/addedvisa",
-        element: <Addedvisa></Addedvisa>,
+        element: (
+          <PrivateRoute>
+            <Addedvisa></Addedvisa>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/visaapplication",

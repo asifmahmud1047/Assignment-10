@@ -44,8 +44,6 @@ const Details = () => {
       applicationMethod,
     };
 
-    console.log(Information);
-
     fetch("https://assignment-10-server-two-sand.vercel.app/apply", {
       method: "POST",
       headers: {
@@ -55,7 +53,6 @@ const Details = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log("Success:", result);
         event.target.reset();
         if (result.insertedId) {
           return toast.success("Visa Added Succussfull");

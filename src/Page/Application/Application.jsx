@@ -6,25 +6,42 @@ import { useLoaderData } from "react-router-dom";
 const Application = () => {
   const applications = useLoaderData();
 
-   const [card, setCard] = useState(applications);
+  const [card, setCard] = useState(applications);
 
-   const handleCancel = (id) => {
-     fetch(`https://assignment-10-server-two-sand.vercel.app/apply/${id}`, {
-       method: "DELETE",
-     })
-       .then((res) => res.json())
-       .then((data) => {
-         if (data.deletedCount > 0) {
-           const remainingCard = card.filter((card) => card._id !== id);
-           setCard(remainingCard);
-           return toast.success("Deleted Successfull");
-         }
-       })
-       .catch((error) => {
-         console.error("Error deleting application:", error);
-         toast.error("Failed to delete the application.");
-       });
-   };
+  const handleCancel = (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this visa?"
+    );
+    if (confirmDelete) {
+      fetch(`https://assignment-10-server-two-sand.vercel.app/apply/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.deletedCount > 0) {
+            toast.success("Visa deleted successfully!");
+            setCard(card.filter((v) => v._id !== id));
+          }
+        });
+    }
+  };
+  // const handleCancel = (id) => {
+  //     fetch(`https://assignment-10-server-two-sand.vercel.app/apply/${id}`,{
+  //         method:'DELETE'
+  //  })
+  //     .then(res => res.json())
+  //     .then(data => {
+  //         if(data.deletedCount>0){
+  //             const remainingCard = card.filter(card => card._id !== id)
+  //             setCard(remainingCard)
+  //             return toast.success('Deleted Successfull')
+  //         }
+  //     })
+  //     .catch((error) => {
+  //         console.error("Error deleting application:", error);
+  //         toast.error("Failed to delete the application.");
+  //     });
+  // }
 
   return (
     <div className="my-20 w-10/12 mx-auto">
