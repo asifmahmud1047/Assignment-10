@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Authcontext } from "../../Authprovider/Authprovider";
+import { AuthContext } from "../../Authprovider/Authprovider";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Addedvisa = () => {
-  const { user } = useContext(Authcontext); // Logged-in user information
+  const { user } = useContext(AuthContext); // Logged-in user information
   const [visa, setVisa] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedVisa, setSelectedVisa] = useState(null); // Track the selected visa for update

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Authcontext } from "../../Authprovider/Authprovider";
+import { AuthContext } from "../../Authprovider/Authprovider";
 
 const Addvisa = () => {
-  const { user } = useContext(Authcontext);
+  const { user } = useContext(AuthContext);
   const email = user.email;
 
   const handleSubmit = (event) => {
