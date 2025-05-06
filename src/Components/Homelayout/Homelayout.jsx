@@ -1,16 +1,67 @@
-import React from "react";
+import React, { useState } from "react";
 import Banner from "../../Page/Banner/Banner";
 import VisaBenefits from "../../Page/VisaBenefits/VisaBenefits";
 import CustomerReviews from "../../Page/CustomerReviews/CustomerReviews.jsx";
 import Latestvisas from "../../Page/Latestvisas/Latestvisas";
 
 const Homelayout = () => {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <div className="w-11/12 mx-auto my-32">
-      <Banner></Banner>
-      <Latestvisas></Latestvisas>
-      <VisaBenefits></VisaBenefits>
-      <CustomerReviews></CustomerReviews>
+    <div
+      className={`w-full mx-auto my-32 transition-colors duration-300 ${
+        darkMode ? "bg-black text-white" : "bg-white text-black"
+      }`}
+    >
+      <div className="w-11/12 mx-auto px-8 py-8">
+        <div className="flex justify-end mb-4">
+          <button
+            onClick={toggleDarkMode}
+            className={`px-4 py-2 rounded ${
+              darkMode ? "bg-gray-200 text-black" : "bg-gray-800 text-white"
+            }`}
+          >
+            {darkMode ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="12" cy="12" r="5" />
+                <path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+              </svg>
+            )}
+          </button>
+        </div>
+        <Banner></Banner>
+        <Latestvisas></Latestvisas>
+        <VisaBenefits></VisaBenefits>
+        <CustomerReviews></CustomerReviews>
+      </div>
     </div>
   );
 };

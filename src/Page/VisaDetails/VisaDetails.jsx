@@ -5,7 +5,7 @@ import { AuthContext } from "../../Authprovider/Authprovider";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const Details = () => {
+const VisaDetails = () => {
   const { user } = useContext(AuthContext);
   const data = useLoaderData();
   const {
