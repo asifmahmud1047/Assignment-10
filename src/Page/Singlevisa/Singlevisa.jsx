@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-// {_id: '6751812754af93152a8bccb3', photo: 'https://i.ibb.co.com/0q8xGrh/Flag-of-Denmark-svg.png', name: 'Denmark', visaType: 'StudentVisa', time: '20'}
-
 const Singlevisa = ({ data }) => {
   const { photo, name, validity, visaType, _id } = data;
   return (

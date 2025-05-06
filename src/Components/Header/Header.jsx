@@ -119,13 +119,22 @@ const Header = () => {
                 src={user.photoURL}
                 alt="User Avatar"
               />
-              <div className="absolute left-1/2 transform -translate-x-1/2 bottom-12 hidden group-hover:flex bg-gray-800 text-white text-xs rounded px-2 py-1 shadow-lg z-50">
-                {user.displayName || "User Name Not Found"}
+              <div className="absolute top-full mt-2 transform -translate-x-1/2 hidden group-hover:flex flex-col items-center bg-gray-800 text-white text-sm rounded-lg px-4 py-3 shadow-lg z-50">
+                {user.displayName ? (
+                  <>
+                    <p className="font-bold mb-2">{user.displayName}</p>
+                    <Link
+                      onClick={signout}
+                      className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-1 rounded"
+                    >
+                      Logout
+                    </Link>
+                  </>
+                ) : (
+                  <p className="text-gray-400">User Name Not Found</p>
+                )}
               </div>
             </div>
-            <Link onClick={signout} className="btn btn-primary">
-              Logout
-            </Link>
           </div>
         ) : (
           <div className="flex items-center gap-2">
