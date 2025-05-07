@@ -65,12 +65,14 @@ const Header = () => {
       </div>
 
       {/* Middle Side: Navigation Links */}
-      <div className="navbar-center hidden lg:flex">
+      <div className="navbar-center hidden lg:flex items-center justify-center">
         <ul className="menu menu-horizontal px-1 space-x-6">
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive ? "text-blue-700 font-bold" : "text-white font-bold"
+              isActive
+                ? "text-white font-bold border-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-700 to-blue-700 hover:from-blue-700 hover:to-blue-500 transition-all duration-300"
+                : "text-white font-bold border-2 px-4 py-2 rounded-xl"
             }
           >
             Home
@@ -78,7 +80,9 @@ const Header = () => {
           <NavLink
             to="/allvisa"
             className={({ isActive }) =>
-              isActive ? "text-blue-700 font-bold" : "text-white font-bold"
+              isActive
+                ? "text-white font-bold border-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-700 to-blue-700 hover:from-blue-700 hover:to-blue-500 transition-all duration-300"
+                : "text-white font-bold border-2 px-4 py-2 rounded-xl"
             }
           >
             All Visas
@@ -86,7 +90,9 @@ const Header = () => {
           <NavLink
             to="/addvisa"
             className={({ isActive }) =>
-              isActive ? "text-blue-700 font-bold" : "text-white font-bold"
+              isActive
+                ? "text-white font-bold border-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-700 to-blue-700 hover:from-blue-700 hover:to-blue-500 transition-all duration-300"
+                : "text-white font-bold border-2 px-4 py-2 rounded-xl"
             }
           >
             Add Visa
@@ -94,7 +100,9 @@ const Header = () => {
           <NavLink
             to="/addedvisa"
             className={({ isActive }) =>
-              isActive ? "text-blue-700 font-bold" : "text-white font-bold"
+              isActive
+                ? "text-white font-bold border-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-700 to-blue-700 hover:from-blue-700 hover:to-blue-500 transition-all duration-300"
+                : "text-white font-bold border-2 px-4 py-2 rounded-xl"
             }
           >
             My Added Visas
@@ -102,7 +110,9 @@ const Header = () => {
           <NavLink
             to="/visaapplication"
             className={({ isActive }) =>
-              isActive ? "text-blue-700 font-bold" : "text-white font-bold"
+              isActive
+                ? "text-white font-bold border-2 px-4 py-2 rounded-xl bg-gradient-to-r from-blue-700 to-blue-700 hover:from-blue-700 hover:to-blue-500 transition-all duration-300"
+                : "text-white font-bold border-2 px-4 py-2 rounded-xl"
             }
           >
             My Visa Applications
@@ -115,7 +125,7 @@ const Header = () => {
           <div className="flex items-center gap-2">
             <div className="relative group">
               <img
-                className="w-10 h-10 rounded-full"
+                className="w-10 h-10 rounded-full border-2 border-blue-700"
                 src={user.photoURL}
                 alt="User Avatar"
               />
