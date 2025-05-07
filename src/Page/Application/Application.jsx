@@ -48,7 +48,7 @@ const Application = () => {
   };
 
   return (
-    <div className="my-20 w-10/12 mx-auto">
+    <div className="my-20 w-10/12 mx-auto font-font">
       <h1 className="text-3xl font-bold text-center mb-10">
         My Visa Applications
       </h1>

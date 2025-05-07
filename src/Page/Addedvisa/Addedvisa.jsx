@@ -94,7 +94,7 @@ const Addedvisa = () => {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 font-font">
       <h2 className="text-2xl font-bold mb-4 text-center">My Added Visas</h2>
       {loading ? (
         <p>Loading...</p>

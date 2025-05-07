@@ -6,7 +6,7 @@ const Header = () => {
     const { user, signout } = useContext(AuthContext);
 
   return (
-    <div className="navbar bg-[#00255c] shadow-md justify-between md:px-4">
+    <div className="navbar bg-[#00255c] shadow-md justify-between md:px-4 font-font">
       {/* Left Side: Logo */}
       <div className="navbar-start">
         {/* Dropdown for Mobile */}

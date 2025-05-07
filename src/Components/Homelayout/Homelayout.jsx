@@ -7,12 +7,9 @@ import Latestvisas from "../../Page/Latestvisas/Latestvisas";
 const Homelayout = () => {
   const [darkMode, setDarkMode] = useState(false);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
 
   return (
-    <div>
+    <div  className="font-font">
       <Banner></Banner>
       <div className="w-11/12 mx-auto px-8 py-8">
         <Latestvisas></Latestvisas>

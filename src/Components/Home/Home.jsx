@@ -5,7 +5,7 @@ import Footer from "../../Page/Footer/Footer";
 
 const Home = () => {
   return (
-    <div className="">
+    <div className="font-font">
       <Header></Header>
       <div className="min-h-[calc(100vh-196px)]">
         <Outlet></Outlet>
